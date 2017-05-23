@@ -1,0 +1,182 @@
+<section class="success" id="courses">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Courses Offered</h2>
+      </div>
+    </div>
+    <table class="table table-striped" [mfData]="CoursesData" #mf="mfDataTable" [mfRowsOnPage]="5">
+      <thead>
+      <tr>
+        <th style="width: 12%">
+          <mfDefaultSorter by="name">Course Name</mfDefaultSorter>
+        </th>
+        <th style="width: 12%">
+          <mfDefaultSorter by="email">Description</mfDefaultSorter>
+        </th>
+        <th style="width: 12%">
+          <mfDefaultSorter by="age">Duration</mfDefaultSorter>
+        </th>
+        <th style="width: 12%">
+          <mfDefaultSorter by="city">NoOfDays</mfDefaultSorter>
+        </th>
+        <th style="width: 12%">
+          <mfDefaultSorter by="name">Coach</mfDefaultSorter>
+        </th>
+        <th style="width: 12%">
+          <mfDefaultSorter by="email">Fee</mfDefaultSorter>
+        </th>
+        <th style="width: 12%">
+          <mfDefaultSorter by="age">TimeSlot</mfDefaultSorter>
+        </th>
+        <th style="width: 15%">
+          <mfDefaultSorter by="city">NoOfStudents</mfDefaultSorter>
+        </th>
+        <th style="width: 15%">
+          <mfDefaultSorter by="city">AvailableSlots</mfDefaultSorter>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of CoursesData; let j=index" >
+        <td bgcolor="#ff7f50">{{item.coursename}}</td>
+        <td bgcolor="#ff7f50">{{item.description}}</td>
+        <td bgcolor="#ff7f50">{{item.duration}}</td>
+        <td bgcolor="#ff7f50">{{item.noOfDays}}</td>
+        <td bgcolor="#ff7f50">{{item.Coach}}</td>
+        <td bgcolor="#ff7f50">{{item.fee}}</td>
+        <td bgcolor="#ff7f50">{{item.timeSlot}}</td>
+        <td bgcolor="#ff7f50">{{item.noOfStudents}}</td>
+        <td bgcolor="#ff7f50">{{item.availableSlots}}</td>
+        <td><button type="button" class="btn btn-primary"  data-toggle="modal" [disabled]="item.noOfStudents<=0" data-target="#myModal"   (click)="enrollment(j,flag)"  >Enroll</button></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="4">
+          <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</section>
+
+
+
+
+<!-- Contact Section -->
+<section  id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Login</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2">
+        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
+        <!-- The form should work on most web servers, but if the form is not working you may need to configure your web server differently. -->
+        <form name="sentMessage" id="sentMessage" novalidate>
+          <div class="row control-group">
+            <select name="person" [(ngModel)]="person">
+              <option value="admin">Admin</option>
+              <option value="student">Student</option>
+            </select>
+            <p class="help-block text-danger"></p>
+          </div>
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <input type="text" class="form-control"  name="mail" [(ngModel)]="mail" placeholder="Email Id">
+          </div>
+          <div class="form-group col-xs-12 floating-label-form-group controls">
+            <input type="password" class="form-control"  name="password" [(ngModel)]="password" placeholder="Password">
+          </div>
+
+          <br>
+          <div id="success"></div>
+          <div class="row">
+            <div class="form-group col-xs-12">
+              <button type="button" class="btn btn-success btn-lg"  (click)="loggingcheck()">Send</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+<!--
+//////////////////////////////////////////Model for Table//////////////////////////////////////////////////
+-->
+<div class="container">
+
+  <!-- Trigger the modal with a button -->
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+
+      <table class="table table-striped" [mfData]="EnrollmentData" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+        <tr>
+          <th style="width: 12%">
+            <mfDefaultSorter by="name">Student First Name</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="email">Student Last Name</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="age">Student Mail</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="name">Course Name</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="email">Description</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="age">Duration</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="city">NoOfDays</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="name">Coach</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="email">Fee</mfDefaultSorter>
+          </th>
+          <th style="width: 12%">
+            <mfDefaultSorter by="age">TimeSlot</mfDefaultSorter>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of EnrollmentData; let j=index" >
+          <td bgcolor="#deb887">{{item.Student_fname}}</td>
+          <td bgcolor="#deb887">{{item.Student_lname}}</td>
+          <td bgcolor="#deb887">{{item.Student_mail}}</td>
+          <td bgcolor="#deb887">{{item.course_name}}</td>
+          <td bgcolor="#deb887">{{item.description}}</td>
+          <td bgcolor="#deb887">{{item.noOfDays}}</td>
+          <td bgcolor="#deb887">{{item.duration}}</td>
+          <td bgcolor="#deb887">{{item.Coach}}</td>
+          <td bgcolor="#deb887">{{item.fee}}</td>
+          <td bgcolor="#deb887">{{item.timeSlot}}</td>
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td colspan="4">
+            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
+
+
+    </div>
+  </div>
+
+</div>
